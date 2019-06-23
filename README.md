@@ -1,2 +1,2 @@
 # docker-povray
-Docker container for poray
+Docker container for povray
