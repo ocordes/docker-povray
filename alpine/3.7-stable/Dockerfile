@@ -37,7 +37,7 @@ RUN make install && mv /usr/local/bin/povray /usr/local/bin/povray.sandybridge
 RUN make clean
 RUN ./configure COMPILED_BY="Oliver Cordes ocordes/povray:3.7-stable" \
       --disable-optimiz \
-      CXXFLAGS="-O3 -march=nehalem -include uint-hack.h -I/usr/include/OpenEX$
+      CXXFLAGS="-O3 -march=nehalem -include uint-hack.h -I/usr/include/OpenEX$"
 RUN make install && mv /usr/local/bin/povray /usr/local/bin/povray.nehalem
 RUN make clean
 RUN ./configure COMPILED_BY="Oliver Cordes ocordes/povray:3.7-stable" \
