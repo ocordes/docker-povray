@@ -65,7 +65,7 @@ FROM alpine:latest
 COPY --from=0 /usr/local /usr/local
 COPY --from=0 /root/.povray /root/.povray
 
-RUN apk add --no-cache \
+RUN apk add --update --no-cache \
     boost \
     zlib \
     libpng \
