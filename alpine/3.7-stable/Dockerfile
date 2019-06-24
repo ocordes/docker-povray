@@ -57,7 +57,7 @@ RUN make install && mv /usr/local/bin/povray /usr/local/bin/povray.x86-64
 RUN cd / && \
     rm -rf /povray && \
     rm -rf /usr/local/share/doc/povray-3.7 && \
-    rm -rf /usr/local/share/povray-3.7/scenes && 
+    rm -rf /usr/local/share/povray-3.7/scenes
 
 
 FROM alpine:latest
