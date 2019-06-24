@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# find the correct executable
+
+CPUFLAGS=$(cat /proc/cpuinfo  | grep flags | head -1 | cut -d":" -f2)
+
+if [ -z "${CPUFLAGS##*avx*}" ]; then
+  CPU=sandybridge
+else
+ if [ -z "${CPUFLAGS##*sse4_2*}" ]; then
+   CPU=nehalem
+ else
+  if [ -z "${CPUFLAGS##*sse4_1*}" ]; then
+   CPU=nehalem
+  else
+   if [ -z "${CPUFLAGS##*ssse3*}" ]; then
+    CPU=core2
+   else
+    if [ -z "${CPUFLAGS##*sse2*}" ]; then
+     if [ -z "${CPUFLAGS##*3dnow*}" ]; then
+      CPU=k8
+     else
+      CPU=x86-64
+     fi
+    fi
+   fi
+  fi
+ fi
+fi
+
+echo "Running on $CPU..."
+
+exec povray.$CPU $*

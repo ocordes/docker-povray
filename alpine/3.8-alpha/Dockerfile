@@ -22,7 +22,7 @@ RUN apk add --update --no-cache \
 
 RUN git clone https://github.com/POV-Ray/povray.git && \
     cd /povray && \
-    git checkout 3.7-stable && \
+    git checkout release/v3.8.0 && \
     cd /povray/unix && \
     ./prebuild.sh && \
     cd /povray &&  \
@@ -30,34 +30,34 @@ RUN git clone https://github.com/POV-Ray/povray.git && \
 
 WORKDIR /povray
 
-RUN ./configure COMPILED_BY="Oliver Cordes ocordes/povray:3.7-stable" \
+RUN ./configure COMPILED_BY="Oliver Cordes ocordes/povray:3.8-alpha" \
       --disable-optimiz \
       CXXFLAGS="-O3 -march=sandybridge -include uint-hack.h -I/usr/include/OpenEXR"
 RUN make install && mv /usr/local/bin/povray /usr/local/bin/povray.sandybridge
 RUN make clean
-RUN ./configure COMPILED_BY="Oliver Cordes ocordes/povray:3.7-stable" \
+RUN ./configure COMPILED_BY="Oliver Cordes ocordes/povray:3.8-alpha" \
       --disable-optimiz \
       CXXFLAGS="-O3 -march=nehalem -include uint-hack.h -I/usr/include/OpenEX$"
 RUN make install && mv /usr/local/bin/povray /usr/local/bin/povray.nehalem
 RUN make clean
-RUN ./configure COMPILED_BY="Oliver Cordes ocordes/povray:3.7-stable" \
+RUN ./configure COMPILED_BY="Oliver Cordes ocordes/povray:3.8-alpha" \
       --disable-optimiz \
       CXXFLAGS="-O3 -march=core2 -include uint-hack.h -I/usr/include/OpenEXR"
 RUN make install && mv /usr/local/bin/povray /usr/local/bin/povray.core2
 RUN make clean
-RUN ./configure COMPILED_BY="Oliver Cordes ocordes/povray:3.7-stable" \
+RUN ./configure COMPILED_BY="Oliver Cordes ocordes/povray:3.8-alpha" \
       --disable-optimiz \
       CXXFLAGS="-O3 -march=k8 -include uint-hack.h -I/usr/include/OpenEXR"
 RUN make install && mv /usr/local/bin/povray /usr/local/bin/povray.k8
 RUN make clean
-RUN ./configure COMPILED_BY="Oliver Cordes ocordes/povray:3.7-stable" \
+RUN ./configure COMPILED_BY="Oliver Cordes ocordes/povray:3.8-alpha" \
       --disable-optimiz \
       CXXFLAGS="-O3 -march=x86-64 -include uint-hack.h -I/usr/include/OpenEXR"
 RUN make install && mv /usr/local/bin/povray /usr/local/bin/povray.x86-64
 RUN cd / && \
     rm -rf /povray && \
-    rm -rf /usr/local/share/doc/povray-3.7 && \
-    rm -rf /usr/local/share/povray-3.7/scenes
+    rm -rf /usr/local/share/doc/povray-3.8 && \
+    rm -rf /usr/local/share/povray-3.8/scenes
 
 
 FROM alpine:latest
