@@ -63,6 +63,7 @@ RUN cd / && \
 FROM alpine:latest
 
 COPY --from=0 /usr/local /usr/local
+COPY --from=0 /root/.povray /root/.povray
 
 RUN apk add --no-cache \
     boost \
@@ -80,7 +81,7 @@ RUN mkdir /source && \
 
 WORKDIR /source
 
-COPY ../../povray /usr/local/bin/povray
+COPY povray /usr/local/bin/povray
 RUN chmod 755 /usr/local/bin/povray
 
 ENTRYPOINT ["/usr/local/bin/povray"]
