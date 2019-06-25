@@ -1,7 +1,7 @@
 FROM alpine:3.9
 
-# written by: Oliver Cordes 2019-06-23
-# changed by: Oliver Cordes 2019-06-23
+# written by: Oliver Cordes 2019-06-25
+# changed by: Oliver Cordes 2019-06-25
 
 
 
@@ -54,6 +54,9 @@ RUN ./configure COMPILED_BY="Oliver Cordes ocordes/povray:3.8-alpha" \
       --disable-optimiz \
       CXXFLAGS="-O3 -march=x86-64 -include uint-hack.h -I/usr/include/OpenEXR"
 RUN make install && mv /usr/local/bin/povray /usr/local/bin/povray.x86-64
+
+WORKDIR /
+
 RUN cd / && \
     rm -rf /povray && \
     rm -rf /usr/local/share/doc/povray-3.8 && \
