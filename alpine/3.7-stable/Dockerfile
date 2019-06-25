@@ -60,12 +60,36 @@ RUN cd / && \
     rm -rf /usr/local/share/povray-3.7/scenes
 
 
-FROM alpine:latest
+#FROM alpine:3.9
 
-COPY --from=0 /usr/local /usr/local
-COPY --from=0 /root/.povray /root/.povray
+#COPY --from=0 /usr/local /usr/local
+#COPY --from=0 /root/.povray /root/.povray
 
-RUN apk add --update --no-cache \
+#RUN apk add --update --no-cache \
+#    boost-thread boot-system  \
+#    zlib \
+#    libpng \
+#    tiff \
+#    sdl \
+#    ilmbase \
+#    openexr && \
+#    rm -rf /var/cache/apk*
+
+RUN apk del \
+    git \
+    coreutils \
+    build-base \
+    autoconf \
+    automake \
+    bash \
+    boost-dev \
+    zlib-dev \
+    libpng-dev \
+    tiff-dev \
+    sdl-dev \
+    ilmbase-dev \
+    openexr-dev && \
+    apk add --no-cache \
     boost \
     zlib \
     libpng \
@@ -73,7 +97,7 @@ RUN apk add --update --no-cache \
     sdl \
     ilmbase \
     openexr && \
-    rm -rf /var/cache/apk*
+    rm -rf /var/cache/apk* && \
 
 RUN mkdir /source && \
     mkdir /output

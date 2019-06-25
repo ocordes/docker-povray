@@ -60,7 +60,7 @@ RUN cd / && \
     rm -rf /usr/local/share/povray-3.8/scenes
 
 
-FROM alpine:latest
+FROM alpine:3.9
 
 COPY --from=0 /usr/local /usr/local
 COPY --from=0 /root/.povray /root/.povray
