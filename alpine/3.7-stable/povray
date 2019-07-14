@@ -2,31 +2,41 @@
 
 # find the correct executable
 
-CPUFLAGS=$(cat /proc/cpuinfo  | grep flags | head -1 | cut -d":" -f2)
+ARCH=$(detect-cpu)
 
-if [ -z "${CPUFLAGS##*avx*}" ]; then
-  CPU=sandybridge
-else
- if [ -z "${CPUFLAGS##*sse4_2*}" ]; then
-   CPU=nehalem
- else
-  if [ -z "${CPUFLAGS##*sse4_1*}" ]; then
-   CPU=nehalem
-  else
-   if [ -z "${CPUFLAGS##*ssse3*}" ]; then
-    CPU=core2
-   else
-    if [ -z "${CPUFLAGS##*sse2*}" ]; then
-     if [ -z "${CPUFLAGS##*3dnow*}" ]; then
-      CPU=k8
-     else
-      CPU=x86-64
-     fi
-    fi
-   fi
-  fi
- fi
-fi
+case ${ARCH} in
+ core2) CPU=core2;;
+ nehalem) CPU=nehalem;;
+ westmere) CPU=westmere;;
+ sandybridge) CPU=sandybridge;;
+ ivybridge) CPU=ivybridge;;
+ haswell) CPU=haswell;;
+ broadwell) CPU=broadwell;;
+ skylake*) CPU=skylake;;
+ cascadelake) CPU=skylake;;
+ cannonlake) CPU=skylake;;
+ icelake*) CPU=skylake;;
+ knl) CPU=knl;;
+ knm) CPU=knm;;
+ silvermont) CPU=silvermont;;
+ goldmont) CPU=silvermont;;
+ goldmont-plus) CPU=silvermont;;
+ tremont) CPU=silvermont;;
+ bonell) CPU=bonell;;
+ athlon64) CPU=athlon64;;
+ athlon64-sse3) CPU=athlon64-sse3;;
+ amdfam10) CPU=amdfam10;;
+ btver1) CPU=btver1;;
+ btver2) CPU=btver2;;
+ bdver1) CPU=bdver1;;
+ bdver2) CPU=bdver2;;
+ bdver3) CPU=bdver2;;
+ bdver4) CPU=bdver2;;
+ znver1) CPU=znver1;;
+ znver2) CPU=znver1;;
+ *) CPU=x86-64;;
+esac
+
 
 echo "Running on $CPU..."
 
