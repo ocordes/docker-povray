@@ -2,7 +2,8 @@
 
 # find the correct executable
 
-ARCH=$(detect-cpu)
+# if ARCH is no set, use detect-cpu
+[ -n "${ARCH}" ] || export ARCH=$(detect-cpu)
 
 case ${ARCH} in
  core2) CPU=core2;;
